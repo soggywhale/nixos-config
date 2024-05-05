@@ -221,6 +221,8 @@
     ripgrep
     gcc
     termius
+    alacritty
+    obsidian
     lmstudio
     gnumake
     ollama
@@ -250,6 +252,7 @@
     xdg-desktop-portal-gtk
     xdg-desktop-portal-gnome
     waybar
+    watershot
     wl-clipboard
     hyprpicker
     git
@@ -301,6 +304,7 @@
     id = [ "23666615" ];
   };
 
+  services.gvfs.enable = true;
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
