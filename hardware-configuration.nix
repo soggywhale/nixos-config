@@ -17,13 +17,16 @@
     { device = "/dev/disk/by-uuid/283eb02f-599f-4a08-8fec-65f7ea1f9387";
       fsType = "ext4";
     };
-
+ # fileSystems."/home" =
+ #   { device = "/dev/disk/by-uuid/a8198816-f16e-49a3-a20c-d4e2e72f4ab1";
+ #     fsType = "btrfs";
+ #     options = [ "compress=zstd" "subvol=home" ];
+ #   };
   fileSystems."/boot/efi" =
     { device = "/dev/disk/by-uuid/CEF5-8A1E";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
-
   swapDevices =
     [ { device = "/dev/disk/by-uuid/9da407f5-004e-4e0a-9b88-cd047f209aa9"; }
     ];
