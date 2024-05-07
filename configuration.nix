@@ -15,6 +15,39 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
+    /bluetooth.nix  
+      ./cloud.nix  
+      ./code.nix  
+      ./container.nix  
+      ./dns.nix  
+      ./exploits.nix  
+      ./forensics.nix  
+      ./fuzzers.nix  
+      ./generic.nix  
+      ./hardware.nix  
+      ./host.nix  
+      ./information-gathering.nix  
+      ./kubernetes.nix  
+      ./ldap.nix  
+      ./load-testing.nix  
+      ./malware.nix  
+      ./misc.nix  
+      ./mobile.nix  
+      ./network.nix  
+      ./packet-generators.nix  
+      ./password.nix  
+      ./port-scanners.nix  
+      ./proxies.nix  
+      ./services.nix  
+      ./smartcards.nix  
+      ./terminals.nix  
+      ./tls.nix  
+      ./traffic.nix  
+      ./tunneling.nix  
+      ./voip.nix  
+      ./web.nix  
+      ./windows.nix  
+      ./wireless.nix  
   ];
 
   # Bootloader.
@@ -70,6 +103,7 @@
   services.tailscale.enable = true;
   services.tailscale.useRoutingFeatures = "both";
 
+  
   # networking.nameservers = [
   #   "1.1.1.1#one.one.one.one"
   #   "1.0.0.1#one.one.one.one"
@@ -200,6 +234,7 @@ in config.boot.kernelPackages.nvidiaPackages.mkDriver {
     extraGroups = [
       "networkmanager"
       "wheel"
+      "docker"
     ];
     packages = with pkgs; [
       firefox
@@ -236,19 +271,25 @@ in config.boot.kernelPackages.nvidiaPackages.mkDriver {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    cifs-utils
     rsync
     neovim
+    cargo
     lazygit
     mangohud
     super-slicer-latest
     ripgrep
+    gnome.nautilus
     dig
     jq
     eww
     swappy
+    nvidia-container-toolkit
     python3
     nmap
     fuzzel
+    gh
+    angryipscanner
     pass
     grimblast
     socat
@@ -287,6 +328,7 @@ in config.boot.kernelPackages.nvidiaPackages.mkDriver {
     xdg-desktop-portal-gnome
     polkit_gnome
     pywalfox-native
+    themix-gui
     wayshot
     slurp
     waybar
@@ -309,6 +351,8 @@ in config.boot.kernelPackages.nvidiaPackages.mkDriver {
     lz4
     hyprcursor
     docker
+    docker-compose
+    playerctl
     anyrun
     fzf
     testdisk-qt
@@ -347,6 +391,9 @@ in config.boot.kernelPackages.nvidiaPackages.mkDriver {
   };
 
   services.gvfs.enable = true;
+
+  programs.dconf.enable = true;
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -363,6 +410,7 @@ in config.boot.kernelPackages.nvidiaPackages.mkDriver {
   };
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+virtualisation.docker.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
