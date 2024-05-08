@@ -15,7 +15,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
-    /bluetooth.nix  
+    ./bluetooth.nix  
       ./cloud.nix  
       ./code.nix  
       ./container.nix  
@@ -239,11 +239,9 @@ in config.boot.kernelPackages.nvidiaPackages.mkDriver {
     packages = with pkgs; [
       firefox
       neovim
-      atlauncher
       prismlauncher
       glfw-wayland-minecraft
-
-      #  thunderbird
+      thunderbird
     ];
   };
 

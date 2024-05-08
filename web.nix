@@ -2,6 +2,10 @@
 
 { pkgs, ... }:
 
+let
+  unstable = import <nixos-unstable> {};
+in
+
 {
   environment.systemPackages = with pkgs; [
     apachetomcatscanner
@@ -60,7 +64,7 @@
     wsrepl
     wuzz
     xcrawl3r
-    xnlinkfinder
+    unstable.xnlinkfinder
     xsubfind3r
   ];
 }
