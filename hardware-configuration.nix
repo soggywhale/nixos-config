@@ -16,12 +16,13 @@
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/283eb02f-599f-4a08-8fec-65f7ea1f9387";
       fsType = "ext4";
+      options = [ "discard" ];
     };
- # fileSystems."/home" =
- #   { device = "/dev/disk/by-uuid/a8198816-f16e-49a3-a20c-d4e2e72f4ab1";
- #     fsType = "btrfs";
- #     options = [ "compress=zstd" "subvol=home" ];
- #   };
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/0851ae04-a68e-47af-9038-dd2c482620f2";
+      fsType = "btrfs";
+      options = [ "compress=zstd" "subvol=home" ];
+    };
   fileSystems."/boot/efi" =
     { device = "/dev/disk/by-uuid/CEF5-8A1E";
       fsType = "vfat";

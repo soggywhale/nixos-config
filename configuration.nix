@@ -6,7 +6,6 @@
   config,
   pkgs,
   lib,
-  inputs,
   ...
 }:
 
@@ -14,40 +13,40 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    inputs.home-manager.nixosModules.default
-    ./bluetooth.nix  
-      ./cloud.nix  
-      ./code.nix  
-      ./container.nix  
-      ./dns.nix  
-      ./exploits.nix  
-      ./forensics.nix  
-      ./fuzzers.nix  
-      ./generic.nix  
-      ./hardware.nix  
-      ./host.nix  
-      ./information-gathering.nix  
-      ./kubernetes.nix  
-      ./ldap.nix  
-      ./load-testing.nix  
-      ./malware.nix  
-      ./misc.nix  
-      ./mobile.nix  
-      ./network.nix  
-      ./packet-generators.nix  
-      ./password.nix  
-      ./port-scanners.nix  
-      ./proxies.nix  
-      ./services.nix  
-      ./smartcards.nix  
-      ./terminals.nix  
-      ./tls.nix  
-      ./traffic.nix  
-      ./tunneling.nix  
-      ./voip.nix  
-      ./web.nix  
-      ./windows.nix  
-      ./wireless.nix  
+     <home-manager/nixos>
+#    ./bluetooth.nix  
+#      ./cloud.nix  
+#      ./code.nix  
+#       ./container.nix  
+#       ./dns.nix  
+#       ./exploits.nix  
+#       ./forensics.nix  
+#       ./fuzzers.nix  
+#       ./generic.nix  
+#       ./hardware.nix  
+#       ./host.nix  
+#       ./information-gathering.nix  
+# #      ./kubernetes.nix  
+#       ./ldap.nix  
+#       ./load-testing.nix  
+#       ./malware.nix  
+#       ./misc.nix  
+#       ./mobile.nix  
+#       ./network.nix  
+#       ./packet-generators.nix  
+#       ./password.nix  
+#       ./port-scanners.nix  
+#       ./proxies.nix  
+#       ./services.nix  
+#       ./smartcards.nix  
+#       ./terminals.nix  
+#       ./tls.nix  
+#       ./traffic.nix  
+#       ./tunneling.nix  
+#       ./voip.nix  
+#       ./web.nix  
+#       ./windows.nix  
+#       ./wireless.nix  
   ];
 
   # Bootloader.
@@ -103,7 +102,7 @@
   services.tailscale.enable = true;
   services.tailscale.useRoutingFeatures = "both";
 
-  
+services.logrotate.checkConfig = false;  
   # networking.nameservers = [
   #   "1.1.1.1#one.one.one.one"
   #   "1.0.0.1#one.one.one.one"
@@ -132,6 +131,9 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  # optimize storage
+ nix.optimise.automatic = true;
 
   # Enable OpenGL
   hardware.opengl = {
@@ -235,8 +237,10 @@ in config.boot.kernelPackages.nvidiaPackages.mkDriver {
       "networkmanager"
       "wheel"
       "docker"
+      "libvirtd"
     ];
     packages = with pkgs; [
+      pass-wayland
       firefox
       neovim
       prismlauncher
@@ -282,7 +286,6 @@ in config.boot.kernelPackages.nvidiaPackages.mkDriver {
     jq
     eww
     swappy
-    nvidia-container-toolkit
     python3
     nmap
     fuzzel
@@ -296,7 +299,7 @@ in config.boot.kernelPackages.nvidiaPackages.mkDriver {
     termius
     alacritty
     obsidian
-    lmstudio
+   # lmstudio
     gnumake
     ollama
     wootility
@@ -308,7 +311,7 @@ in config.boot.kernelPackages.nvidiaPackages.mkDriver {
     cmake
     fd
     zsh
-    nodejs_21
+    nodejs_22
     discord
     neovim
     wget
@@ -334,6 +337,8 @@ in config.boot.kernelPackages.nvidiaPackages.mkDriver {
     wl-clipboard
     hyprpicker
     git
+    python311Packages.wheel
+    python310Packages.wheel
     vscode-fhs
     kitty
     appimage-run
@@ -409,6 +414,8 @@ in config.boot.kernelPackages.nvidiaPackages.mkDriver {
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 virtualisation.docker.enable = true;
+virtualisation.libvirtd.enable = true;
+programs.virt-manager.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
